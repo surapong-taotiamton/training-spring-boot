@@ -86,6 +86,26 @@ public class TestDbController {
     }
 
 
+    @GetMapping("/test-join")
+    public void testJoin() {
+
+        List<Tuple> resultFromDb = entityManager.createNativeQuery(
+                "SELECT * " +
+                "FROM shop " +
+                "INNER JOIN goods " +
+                "ON shop.shop_id = goods.shop_id",
+                Tuple.class).getResultList();
+        for (Tuple tuple : resultFromDb) {
+            String shopId = tuple.get("shop_id", String.class);
+            String shopName = tuple.get("shop_name", String.class);
+            String goodsId = tuple.get("goods_id", String.class);
+            String goodsName = tuple.get("goods_name", String.class);
+            System.out.println(shopId + " : " + shopName + " : " + goodsId + " : " + goodsName );
+        }
+
+    }
+
+
 
 
 
