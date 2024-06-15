@@ -12,7 +12,7 @@ public class InformationControllerDto {
     @Data
     public static class InformationData {
         private String name;
-        private int age;
+        private String value;
     }
 
 }
