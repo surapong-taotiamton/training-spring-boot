@@ -20,4 +20,18 @@ public class ForThirdPartyDto {
         private String email;
     }
 
+
+    @Accessors(chain = true)
+    @Data
+    public static class ShopInfoExternalData {
+        private String name;
+        private String ownerFirstname;
+        private String ownerLastname;
+        private String contactNo;
+        private String address;
+        private String email;
+        private String taxId;
+        private String country;
+    }
+
 }

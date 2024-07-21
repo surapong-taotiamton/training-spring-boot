@@ -29,6 +29,18 @@ public class ShopServiceSpec {
 
     @Accessors(chain = true)
     @Data
+    public static class UpdateShopRequest {
+        private String shopId;
+        private String shopName;
+        private String shopAddress;
+        private String shopEmail;
+        private String shopContactNo;
+    }
+
+
+
+    @Accessors(chain = true)
+    @Data
     public static class GoodsInfo {
         private String goodsId;
         private String goodsName;

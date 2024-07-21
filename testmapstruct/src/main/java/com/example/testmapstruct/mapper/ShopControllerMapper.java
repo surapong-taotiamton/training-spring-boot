@@ -15,4 +15,13 @@ public interface ShopControllerMapper {
     @Mapping(target = "email", source = "shopEmail")
     ForThirdPartyDto.ShopInfo toShopInfo(ShopServiceSpec.ShopInfo serviceData);
 
+    @Mapping(target = "name", source = "shopName")
+    @Mapping(target = "contactNo", source = "shopContactNo")
+    @Mapping(target = "address", source = "shopAddress")
+    @Mapping(target = "email", source = "shopEmail")
+    @Mapping(target = "taxId", ignore = true)
+    //@Mapping(target = "country", ignore = true)
+    @Mapping(target = "country", expression = "java(\"THAILAND\")")
+    ForThirdPartyDto.ShopInfoExternalData toShopInfoExternalData(ShopServiceSpec.ShopInfo serviceData);
+
 }
