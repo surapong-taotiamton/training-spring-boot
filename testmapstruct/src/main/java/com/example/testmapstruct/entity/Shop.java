@@ -13,17 +13,11 @@ public class Shop {
 
     @Id
     private String shopId;
-
     private String shopName;
-
     private String shopAddress;
-
     private String shopEmail;
-
     private String shopContactNo;
-
     private String ownerFirstname;
-
     private String ownerLastname;
 
 }
