@@ -21,7 +21,7 @@ public class BankServiceImpl implements BankService {
     private final BankAccountRepository bankAccountRepository;
 
     @Override
-    @Transactional(isolation = Isolation.READ_UNCOMMITTED)
+    @Transactional(isolation = Isolation.REPEATABLE_READ)
     public BankServiceSpec.BankAccountInfo withdraw(BankServiceSpec.WithdrawRequest withdrawRequest) {
 
         BankAccount bankAccount = bankAccountRepository.findById(withdrawRequest.getBankAccountId()).orElseThrow();
@@ -52,7 +52,7 @@ public class BankServiceImpl implements BankService {
     }
 
     @Override
-    @Transactional(isolation = Isolation.READ_UNCOMMITTED)
+    @Transactional(isolation = Isolation.REPEATABLE_READ)
     public BankServiceSpec.VerifyLoanResponse verifyLoan(BankServiceSpec.VerifyLoanRequest verifyLoanRequest) {
 
         BankServiceSpec.BankAccountInfo bankAccountInfo = bankAccountRepository.findByBankAccountIdForVerify(verifyLoanRequest.getBankAccountId()).orElseThrow();
@@ -71,7 +71,7 @@ public class BankServiceImpl implements BankService {
     }
 
     @Override
-    @Transactional(isolation = Isolation.READ_UNCOMMITTED)
+    @Transactional(isolation = Isolation.SERIALIZABLE)
     public BankServiceSpec.SummaryActiveAccountReportResponse summaryActiveAccountReport() {
 
         Long noAccount = bankAccountRepository.getNoOfAccount();
