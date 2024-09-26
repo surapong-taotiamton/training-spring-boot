@@ -67,3 +67,9 @@ Medium : https://surapong-taotiamton.medium.com/
 [สอนเขียน Backend Web Application ด้วย Spring boot : ตอนที่ 13 Basic Transaction](https://youtu.be/POxrwFBNtdY)
 
 [![](https://img.youtube.com/vi/POxrwFBNtdY/0.jpg)](https://youtu.be/POxrwFBNtdY)
+
+
+[สอนเขียน Backend Web Application ด้วย Spring boot: ตอนที่ 14 Concurrency Problem and Isolation level](https://youtu.be/2BYrvU_Pdb0)
+
+[![](https://img.youtube.com/vi/2BYrvU_Pdb0/0.jpg)](https://youtu.be/2BYrvU_Pdb0)
+
