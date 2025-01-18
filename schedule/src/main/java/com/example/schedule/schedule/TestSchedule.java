@@ -8,13 +8,13 @@ import org.springframework.stereotype.Component;
 
 import java.util.concurrent.TimeUnit;
 
-@ConditionalOnProperty(name = "do.schedule", havingValue = "true", matchIfMissing = false)
-@Component
+//@ConditionalOnProperty(name = "do.schedule", havingValue = "true", matchIfMissing = false)
+//@Component
 public class TestSchedule {
 
     private static final Logger logger = LoggerFactory.getLogger(TestSchedule.class);
 
-    @Scheduled(cron = "0 * * * * *")
+    //@Scheduled(cron = "0 * * * * *")
     public void testSchedule() throws  Exception{
         logger.info("Begin testSchedule");
 
