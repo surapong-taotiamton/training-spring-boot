@@ -73,3 +73,16 @@ Medium : https://surapong-taotiamton.medium.com/
 
 [![](https://img.youtube.com/vi/2BYrvU_Pdb0/0.jpg)](https://youtu.be/2BYrvU_Pdb0)
 
+
+[สอนเขียน Backend Web Application ด้วย Spring boot: ตอนที่ 15 Schedule](https://youtu.be/OOWzqqqiGg0)
+
+[![](https://img.youtube.com/vi/OOWzqqqiGg0/0.jpg)](https://youtu.be/OOWzqqqiGg0)
+
+[สอนเขียนBackend Web Application ด้วย Spring boot:ตอนที่16 ปัญหาเกี่ยวกับ Schduleเมื่อทำการ Scale out](https://youtu.be/rK6ovQADAZs)
+
+[![](https://img.youtube.com/vi/rK6ovQADAZs/0.jpg)](https://youtu.be/rK6ovQADAZs)
+
+[สอนเขียน Backend Web Application ด้วย Spring boot: ตอนที่ 17 Authentication](https://youtu.be/MYFwdGowT0s)
+
+[![](https://img.youtube.com/vi/MYFwdGowT0s/0.jpg)](https://youtu.be/MYFwdGowT0s)
+
