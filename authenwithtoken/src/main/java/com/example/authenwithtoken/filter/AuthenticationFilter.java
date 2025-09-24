@@ -24,6 +24,7 @@ public class AuthenticationFilter implements Filter {
         boolean successToken = authenticationService.verifyToken(token);
 
         if (successToken) {
+            authenticationService.updateLastConnectServer(token);
             filterChain.doFilter(servletRequest, servletResponse);
         } else {
             httpServletResponse.setStatus(401);

@@ -7,6 +7,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
+import java.time.temporal.TemporalUnit;
+import java.util.concurrent.TimeUnit;
+
 @Slf4j
 @Service
 @RequiredArgsConstructor
@@ -20,8 +25,11 @@ public class AuthenticationService {
         if (tabUser == null || !password.equals(tabUser.getPassword())) {
             return null;
         } else {
+            LocalDateTime currentDateTime = LocalDateTime.now();
             String token = RandomStringUtils.secure().nextAlphanumeric(50);
             tabUser.setToken(token);
+            tabUser.setLastLogin(currentDateTime);
+            tabUser.setLastConnectServer(currentDateTime);
             tabUserRepository.save(tabUser);
             return String.format("%s:%s", tabUser.getUserId(), token);
         }
@@ -39,7 +47,30 @@ public class AuthenticationService {
 
         TabUser tabUser = tabUserRepository.findById(uid).orElse(null);
 
-        return tabUser != null && ( tokenAfterSplit != null && tokenAfterSplit.equals(tabUser.getToken()) );
+        boolean correctToken = tabUser != null && ( tokenAfterSplit != null && tokenAfterSplit.equals(tabUser.getToken()) );
+
+        LocalDateTime currentDateTime = LocalDateTime.now();
+
+        log.info("Last login server : {}", tabUser.getLastLogin());
+        log.info("Last connect server : {}", tabUser.getLastConnectServer());
+        log.info("Current time : {}", currentDateTime);
+
+        boolean exceedTokenLifetimeAfterLogin = tabUser != null && currentDateTime.isAfter ( tabUser.getLastLogin().plus(8, ChronoUnit.HOURS) );
+        boolean exceedLastConnectServer = tabUser != null && currentDateTime.isAfter( tabUser.getLastConnectServer().plus(5, ChronoUnit.MINUTES));
+
+        log.info("correctToken : {}", correctToken);
+        log.info("exceedTokenLifetimeAfterLogin : {}", exceedTokenLifetimeAfterLogin);
+        log.info("exceedLastConnectServer : {}", exceedLastConnectServer);
+
+        return correctToken && !exceedTokenLifetimeAfterLogin && !exceedLastConnectServer;
+    }
+
+    public void updateLastConnectServer(String tokenFromRequest) {
+        String[] splitToken = tokenFromRequest.split(":");
+        String uid = splitToken[0];
+        TabUser tabUser = tabUserRepository.findById(uid).orElseThrow();
+        tabUser.setLastConnectServer(LocalDateTime.now());
+        tabUserRepository.save(tabUser);
     }
 
 }
