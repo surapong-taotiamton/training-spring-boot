@@ -1,6 +1,6 @@
 package com.example.authenwithtoken.filter;
 
-import com.example.authenwithtoken.service.AuthenticationService;
+import com.example.authenwithtoken.service.AuthenticationServiceInterface;
 import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -11,7 +11,7 @@ import java.io.IOException;
 @RequiredArgsConstructor
 public class AuthenticationFilter implements Filter {
 
-    private final AuthenticationService authenticationService;
+    private final AuthenticationServiceInterface authenticationService;
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {

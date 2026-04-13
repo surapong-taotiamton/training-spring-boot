@@ -1,7 +1,7 @@
 package com.example.authenwithtoken.configuration;
 
 import com.example.authenwithtoken.filter.AuthenticationFilter;
-import com.example.authenwithtoken.service.AuthenticationService;
+import com.example.authenwithtoken.service.AuthenticationServiceInterface;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Configuration;
 @RequiredArgsConstructor
 @Configuration
 public class FilterConfiguration {
-    private final AuthenticationService authenticationService;
+    private final AuthenticationServiceInterface authenticationService;
 
     @Bean
     FilterRegistrationBean<AuthenticationFilter> authenticationFilterFilterRegistrationBean() {

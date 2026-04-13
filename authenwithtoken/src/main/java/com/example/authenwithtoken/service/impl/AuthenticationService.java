@@ -1,7 +1,8 @@
-package com.example.authenwithtoken.service;
+package com.example.authenwithtoken.service.impl;
 
 import com.example.authenwithtoken.entity.TabUser;
 import com.example.authenwithtoken.repository.TabUserRepository;
+import com.example.authenwithtoken.service.AuthenticationServiceInterface;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -9,16 +10,15 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
-import java.time.temporal.TemporalUnit;
-import java.util.concurrent.TimeUnit;
 
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class AuthenticationService {
+public class AuthenticationService implements AuthenticationServiceInterface {
 
     private final TabUserRepository tabUserRepository;
 
+    @Override
     public String genToken(String username, String password) {
         TabUser tabUser = tabUserRepository.findByUsername(username).orElse(null);
 
@@ -35,6 +35,7 @@ public class AuthenticationService {
         }
     }
 
+    @Override
     public boolean verifyToken(String tokenFromRequest) {
 
         if (tokenFromRequest == null) {
@@ -65,6 +66,7 @@ public class AuthenticationService {
         return correctToken && !exceedTokenLifetimeAfterLogin && !exceedLastConnectServer;
     }
 
+    @Override
     public void updateLastConnectServer(String tokenFromRequest) {
         String[] splitToken = tokenFromRequest.split(":");
         String uid = splitToken[0];

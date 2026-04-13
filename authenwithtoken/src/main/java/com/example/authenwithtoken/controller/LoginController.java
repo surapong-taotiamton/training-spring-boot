@@ -2,7 +2,7 @@ package com.example.authenwithtoken.controller;
 
 import com.example.authenwithtoken.controller.dto.LoginRequest;
 import com.example.authenwithtoken.controller.dto.LoginResponse;
-import com.example.authenwithtoken.service.AuthenticationService;
+import com.example.authenwithtoken.service.AuthenticationServiceInterface;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class LoginController {
 
-    private final AuthenticationService authenticationService;
+    private final AuthenticationServiceInterface authenticationService;
 
     @PostMapping("/auth/login")
     public ResponseEntity<LoginResponse>  login(@RequestBody LoginRequest request) {
