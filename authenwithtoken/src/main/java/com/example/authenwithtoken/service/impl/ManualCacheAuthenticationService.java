@@ -15,8 +15,8 @@ import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.time.temporal.TemporalUnit;
 
-@Slf4j
 @Service
+@Slf4j
 @RequiredArgsConstructor
 public class ManualCacheAuthenticationService implements AuthenticationServiceInterface {
 
@@ -50,6 +50,7 @@ public class ManualCacheAuthenticationService implements AuthenticationServiceIn
                     .setLastConnectServer(tabUser.getLastConnectServer());
 
             cacheManager.getCache(CACHE_NAME).put(tabUserInformation.getUserId(), tabUserInformation);
+            log.info("userId : {}  push data to cache complete", tabUser.getUserId());
 
             return String.format("%s:%s", tabUser.getUserId(), token);
         }
@@ -120,8 +121,6 @@ public class ManualCacheAuthenticationService implements AuthenticationServiceIn
 
         TabUserInformation tabUserInformation = cacheManager.getCache(CACHE_NAME).get(uid, TabUserInformation.class);
 
-        long lifetimeCacheInSec = 600;
-
 
         if (tabUserInformation == null) {
             TabUser tabUser = tabUserRepository.findById(uid).orElseThrow();
@@ -134,7 +133,15 @@ public class ManualCacheAuthenticationService implements AuthenticationServiceIn
             cacheManager.getCache(CACHE_NAME).put(tabUserInformation.getUserId(), tabUserInformation);
         }
 
-        boolean expireCache = tabUserInformation.getLastConnectServer().plusSeconds(lifetimeCacheInSec).isAfter(LocalDateTime.now());
+        long lifetimeCacheInSec = 60;
+
+        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime expireCacheTime = tabUserInformation.getLastConnectServer().plusSeconds(lifetimeCacheInSec);
+
+        log.info("now : {}", now);
+        log.info("expireCacheTime : {}", expireCacheTime);
+
+        boolean expireCache = now.isAfter(expireCacheTime)  ;
 
         if (expireCache) {
             // ทำการ Update lastConnectServer ไปที่ database และทำการ update cache

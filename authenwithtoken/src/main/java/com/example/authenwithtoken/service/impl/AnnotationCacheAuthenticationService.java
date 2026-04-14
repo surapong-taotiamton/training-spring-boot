@@ -7,10 +7,12 @@ import com.example.authenwithtoken.service.TabUserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 
+//@Service
 @Slf4j
 @RequiredArgsConstructor
 public class AnnotationCacheAuthenticationService  implements AuthenticationServiceInterface {
@@ -83,15 +85,24 @@ public class AnnotationCacheAuthenticationService  implements AuthenticationServ
             return;
         }
 
-        long lifetimeCacheInSec = 600;
-        boolean expireCache = tabUserServiceDto.getLastConnectServer().plusSeconds(lifetimeCacheInSec).isAfter(LocalDateTime.now());
+        long lifetimeCacheInSec = 60;
+
+        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime expireCacheTime = tabUserServiceDto.getLastConnectServer().plusSeconds(lifetimeCacheInSec);
+
+        log.info("now : {}", now);
+        log.info("expireCacheTime : {}", expireCacheTime);
+
+        boolean expireCache = now.isAfter(expireCacheTime)  ;
 
         if (expireCache) {
             // ทำการ update last connect server เพื่อให้มันไป update ลง Database
+            log.info("userId : {} In case expireCache ", uid);
             tabUserServiceDto.setLastConnectServer(LocalDateTime.now());
-            tabUserService.updateTabUser(new TabUserService.TabUserServiceDto());
+            tabUserService.updateTabUser(tabUserServiceDto);
         } else {
             // ไม่ต้องทำอะไร
+            log.info("userId : {} In case non expire ", uid);
         }
 
     }

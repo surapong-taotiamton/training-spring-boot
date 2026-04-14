@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 
 @Slf4j
-@Service
+//@Service
 @RequiredArgsConstructor
 public class AuthenticationService implements AuthenticationServiceInterface {
 
