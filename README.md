@@ -92,3 +92,9 @@ Medium : https://surapong-taotiamton.medium.com/
 
 [![](https://img.youtube.com/vi/5FpdsfmUd0g/0.jpg)](https://youtu.be/5FpdsfmUd0g)
 
+
+[สอนเขียน Backend Web Application ด้วย Spring boot: ตอนที่ 19 Authentication ด้วย Token ร่วมกับ Cache](https://youtu.be/3S2Cng4P1rs)
+
+[![](https://img.youtube.com/vi/3S2Cng4P1rs/0.jpg)](https://youtu.be/3S2Cng4P1rs)
+
+
